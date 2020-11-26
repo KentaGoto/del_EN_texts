@@ -1,0 +1,30 @@
+﻿//////////////////////////////////////////////////////
+//
+// 英数字記号のみの行とから行を可能な限り削除する
+//
+//////////////////////////////////////////////////////
+
+document.selection.StartOfDocument(); // ドキュメントの最初にカーソルを移動する
+
+var characterToDelete_regex = "^[\\x01-\\x7E’“”①-⑨０-９Ａ-Ｚａ-ｚ‘－Ⅰ○×・⇒%.（）：･Ⅱ±μ•●■φ°–µ…\\t]+$\\n";
+var blankLine = "^$\\n";
+
+var flag_1 = 0;
+var flag_2 = 0;
+
+if ( document.selection.Find( characterToDelete_regex,eeFindNext | eeFindReplaceRegExp,0 ) ){
+	document.selection.Replace( characterToDelete_regex,"",eeReplaceAll | eeFindReplaceRegExp,0 );
+	document.selection.Replace( "^$\\n","",eeReplaceAll | eeFindReplaceRegExp,0 );
+	flag_1++;
+} else if ( document.selection.Find( blankLine,eeFindNext | eeFindReplaceRegExp,0 ) ){
+	document.selection.Replace( blankLine,"",eeReplaceAll | eeFindReplaceRegExp,0 );
+	flag_2++;
+} else {
+	alert( "削除できる文字列は何もありませんでした" );
+}
+
+if ( flag_1 == true ){
+	confirm( "不要な文字列を削除しました" );
+} else if ( flag_2 == true ){
+	confirm( "削除できる文字列はありませんでした。空行のみ削除しました" );
+}

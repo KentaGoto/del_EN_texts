@@ -1,10 +1,11 @@
 ﻿//////////////////////////////////////////////////////
 //
-// 英数字記号のみの行とから行を可能な限り削除する
+// Remove alphanumeric symbols only lines and 
+// blank lines as much as possible
 //
 //////////////////////////////////////////////////////
 
-document.selection.StartOfDocument(); // ドキュメントの最初にカーソルを移動する
+document.selection.StartOfDocument(); // Move the cursor to the beginning of the document
 
 var characterToDelete_regex = "^[\\x01-\\x7E’“”①-⑨０-９Ａ-Ｚａ-ｚ‘－Ⅰ○×・⇒%.（）：･Ⅱ±μ•●■φ°–µ…\\t]+$\\n";
 var blankLine = "^$\\n";
@@ -20,11 +21,11 @@ if ( document.selection.Find( characterToDelete_regex,eeFindNext | eeFindReplace
 	document.selection.Replace( blankLine,"",eeReplaceAll | eeFindReplaceRegExp,0 );
 	flag_2++;
 } else {
-	alert( "削除できる文字列は何もありませんでした" );
+	alert( "There was nothing that can be deleted" );
 }
 
 if ( flag_1 == true ){
-	confirm( "不要な文字列を削除しました" );
+	confirm( "Removed unnecessary strings" );
 } else if ( flag_2 == true ){
-	confirm( "削除できる文字列はありませんでした。空行のみ削除しました" );
+	confirm( "There was no string to delete. Only blank lines were removed" );
 }

@@ -1,7 +1,7 @@
 # del_EN_texts 
 
 ## Description
-EmEditor上で開いたテキストから英数記号のみの行を削除するマクロ
+A macro to remove lines of alphanumeric characters only from text opened on EmEditor.
 
 ## Requires
 - EmEditor
